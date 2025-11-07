@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../../img/favicon.ico">
+        <title>Trips - London Bikes</title>
+        <link href="../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../../css/brands.min.css" rel="stylesheet">
+        <link href="../../css/solid.min.css" rel="stylesheet">
+        <link href="../../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="../..">London Bikes</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">
+                                <a href="../.." class="nav-link">Index</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"  aria-expanded="false">Preparation</a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../preparation/" class="dropdown-item">Data Preparation</a>
+</li>
+                                    
+<li>
+    <a href="../../preparation/gathering/" class="dropdown-item">Data Gathering</a>
+</li>
+                                    
+<li>
+    <a href="../../preparation/description/" class="dropdown-item">Data Descripton</a>
+</li>
+                                    
+<li>
+    <a href="../../preparation/preprocess/" class="dropdown-item">Data Pre Processing</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle active" aria-current="page" role="button" data-bs-toggle="dropdown"  aria-expanded="false">Exploratory Data Analysis</a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../" class="dropdown-item">Exploratory Data Analysis</a>
+</li>
+                                    
+<li>
+    <a href="./" class="dropdown-item active" aria-current="page">Trips</a>
+</li>
+                                    
+<li>
+    <a href="../bikes/" class="dropdown-item">Bikes</a>
+</li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a rel="prev" href="../" class="nav-link">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a rel="next" href="../bikes/" class="nav-link">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#trips" class="nav-link">Trips</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#trip-duration" class="nav-link">Trip duration</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="trips">Trips</h1>
+<h2 id="trip-duration">Trip duration</h2>
+<p>Trip duration times range from a few seconds to many days. With most them falling under around 120 minutes.</p>
+<p><img alt="Trip duration histogram: complete dataset" src="../../images/01_duration_hist_total.png" /></p>
+<p><img alt="Trip duration histogram: less than 2 hours" src="../../images/01_duration_hist_120_min.png" /></p>
+<h3 id="round-trips">Round-trips</h3>
+<p>Flagging trips with the same start and end station as round trips reveals some insigts.</p>
+<p>Round trips are much less common than one-way trips.</p>
+<pre><code class="language-sql">SELECT
+(station_end_id == station_start_id) AS round_trip,
+count(*) as count
+FROM trips_raw
+GROUP BY round_trip;
+
+┌────────────┬─────────┐
+│ round_trip │  count  │
+│  boolean   │  int64  │
+├────────────┼─────────┤
+│ false      │ 8434689 │
+│ true       │  320463 │
+└────────────┴─────────┘
+</code></pre>
+<p><img alt="Trip duration histogram: one-way trip vs round trip" src="../../images/01_duration_hist_round_trip_both.png" /></p>
+<p>Closer inspection of round trips reveals a double mode.</p>
+<p><img alt="Trip duration histogram: round trip" src="../../images/01_duration_hist_round_trip_clean.png" /></p>
+<p>Some possible causes:</p>
+<ul>
+<li><strong>short trips</strong>:</li>
+<li>users changing their mind about using the bike</li>
+<li>users testing the app functionality and/or the bikes themselves</li>
+<li>users taking short trips around the block</li>
+<li><strong>average trips</strong>:</li>
+<li>users running errands</li>
+<li>taking longer pleassure routes</li>
+</ul>
+<h3 id="trips-under-1-minute">Trips under 1 minute</h3>
+<p>There is an abundance of trips under 1 minute.</p>
+<p><img alt="Trip duration histogram: less than 5 minutes" src="../../images/01_duration_hist_5_min_raw.png" /></p>
+<pre><code class="language-sql">SELECT
+(station_end_id == station_start_id) AS round_trip,
+count(*) as count
+FROM trips_raw
+WHERE duration_ms / (1000 * 60) &lt; 1
+GROUP BY round_trip;
+
+┌────────────┬───────┐
+│ round_trip │ count │
+│  boolean   │ int64 │
+├────────────┼───────┤
+│ false      │  2148 │
+│ true       │ 67117 │
+└────────────┴───────┘
+</code></pre>
+<p>Removing the round trips of less than 1 minute we get a more natural distrubution.</p>
+<p><img alt="Trip duration histogram: less than 5 minutes clean" src="../../images/01_duration_hist_5_min_clean.png" /></p>
+<p>Without more information it's impossible to discern the quality of the remaining 2 thousand trips records. Some posibilities:</p>
+<ul>
+<li>The two stations are really close and make it possible to get between them in less than a minute.</li>
+<li>Data quality issue, assigning the wrong ID to the end station.</li>
+</ul>
+<p>Going forward I will only focus on trips with durations:</p>
+<ul>
+<li>less or equal to 60 minutes</li>
+<li>different start and end locations if <code>duration_minutes</code> is less than 1 minute.</li>
+</ul>
+<pre><code class="language-sql">DELETE FROM trips
+WHERE
+duration_minutes &gt; 60
+OR
+(duration_minutes &lt; 1 AND station_start_id == station_end_id);
+</code></pre></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../js/base.js"></script>
+        <script src="../../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>
