@@ -1,0 +1,12 @@
+site_name: London Bikes
+nav:
+  - "index.md"
+  - "Preparation":
+      - "preparation/index.md"
+      - "preparation/gathering.md"
+      - "preparation/description.md"
+      - "preparation/preprocess.md"
+  - "Exploratory Data Analysis":
+      - "eda/index.md"
+      - "eda/trips.md"
+      - "eda/bikes.md"

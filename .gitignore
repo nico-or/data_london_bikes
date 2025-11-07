@@ -1,0 +1,4 @@
+data/**/*.gz
+*.duckdb
+notes
+site
