@@ -16,8 +16,8 @@ Round trips are much less common than one-way trips.
 
 ```sql
 SELECT
-(station_end_id == station_start_id) AS round_trip,
-count(*) as count
+  (station_end_id == station_start_id) AS round_trip,
+  COUNT(*) as count
 FROM trips_raw
 GROUP BY round_trip;
 
@@ -54,8 +54,8 @@ There is an abundance of trips under 1 minute.
 
 ```sql
 SELECT
-(station_end_id == station_start_id) AS round_trip,
-count(*) as count
+  (station_end_id == station_start_id) AS round_trip,
+  COUNT(*) as count
 FROM trips_raw
 WHERE duration_ms / (1000 * 60) < 1
 GROUP BY round_trip;

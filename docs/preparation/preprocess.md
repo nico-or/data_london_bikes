@@ -83,19 +83,19 @@ A reduced version of the final query to load the secondary format files:
 ```sql
 -- Load format_1 files
 INSERT INTO trips_raw
-    SELECT
-        "Number" AS trip_id,
-        ...
-        "Total duration (ms)" AS duration_ms,
-    FROM read_csv(
-        'data/format_1/*.csv.gz',
-        types={
-            'Start date': TIMESTAMP,
-            ...
-            'Bike number': BIGINT,
-        },
-        timestampformat='%d/%m/%Y %H:%M'
-    );
+SELECT
+    "Number" AS trip_id,
+    -- more lines ...
+    "Total duration (ms)" AS duration_ms,
+FROM read_csv(
+    'data/format_1/*.csv.gz',
+    types={
+        'Start date': TIMESTAMP,
+        -- more lines ...
+        'Bike number': BIGINT,
+    },
+    timestampformat='%d/%m/%Y %H:%M'
+);
 ```
 
 ## Utility Attributes
