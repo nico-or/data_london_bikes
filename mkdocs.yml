@@ -1,4 +1,11 @@
 site_name: London Bikes
+repo_url: https://github.com/nico-or/data_london_bikes
+copyright: Copyright &copy; 2025 Nicolás Órdenes
+
+theme:
+  name: material
+  features:
+    - navigation.footer
 nav:
   - "index.md"
   - "Collection":
