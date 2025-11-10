@@ -1,4 +1,4 @@
-# Exploratory Data Analysis
+# Analysis
 
 Now we will make a review of the main objets of the dataset:
 
