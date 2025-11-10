@@ -1,4 +1,4 @@
-# Data Pre Processing
+# Data Loading
 
 Before analysis we must join all files into a convenient format that allows us freedom to query and transform the data. The tool of choice was DuckDB.
 
