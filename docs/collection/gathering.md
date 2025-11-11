@@ -2,7 +2,13 @@
 
 The data source is the [Transport for London (TfL) Open Data](https://tfl.gov.uk/info-for/open-data-users/our-open-data), in particular, their [cycling section](https://cycling.data.tfl.gov.uk/).
 
-The data is published aggregating 2 weeks of data per CSV file (2 per month, 24 in a year).
+We will focus on the data presentend in the ` usage-stats/` section.
+
+## Available data
+
+The data is published as a single CSV file every two weeks. Individual links for the CSV files ranging from January 2016 up to May 2025 are available at the time of writting. There are also individual ZIP files with all the year CSV files for 2012 to 2016.
+
+We will focus our work on the data from 2024, since it is the most recent year with it's complete data available.
 
 ## Download
 
@@ -10,13 +16,21 @@ Opening the [TfL cycling repositorty](https://cycling.data.tfl.gov.uk/) and exec
 
 ```js
 links = $$("a");
-links.filter((e) => e.innerText.includes("2024.csv"));
+links.filter((e) => {
+  e.innerText.includes("2024.csv");
+});
 ```
 
-To save disk space we compress eeach individual file using gzip.
+## Storage
+
+For long time storage we compress the files using Gzip, which redices the dataset total disk space from 1.4 Gb to 300 Mb.
 
 ```sh
-ls data/*.csv | parallel -j 6 gzip -k {}
-```
+# Plain bash
+for file in data/*.csv;
+do gzip $file;
+done
 
-This reduces the dataset size from 1.4Gb to 300Mb.
+# leveraging GNU parallel
+ls data/*.csv | parallel -j 6 gzip {}
+```
