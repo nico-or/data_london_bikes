@@ -10,7 +10,7 @@ Trip duration times range from a few seconds to many days. With most them fallin
 
 ### Round-trips
 
-Flagging trips with the same start and end station as round trips reveals some insigts.
+Flagging trips with the same start and end station as round trips reveals some insights.
 
 Round trips are much less common than one-way trips.
 
@@ -44,7 +44,7 @@ Some possible causes:
   - users taking short trips around the block
 - **average trips**:
   - users running errands
-  - taking longer pleassure routes
+  - taking longer pleasure routes
 
 ### Trips under 1 minute
 
@@ -69,11 +69,11 @@ GROUP BY round_trip;
 └────────────┴───────┘
 ```
 
-Removing the round trips of less than 1 minute we get a more natural distrubution.
+Removing the round trips of less than 1 minute we get a more natural distribution.
 
 ![Trip duration histogram: less than 5 minutes clean](../images/01_duration_hist_5_min_clean.png)
 
-Without more information it's impossible to discern the quality of the remaining 2 thousand trips records. Some posibilities:
+Without more information it's impossible to discern the quality of the remaining 2 thousand trips records. Some possibilities:
 
 - The two stations are really close and make it possible to get between them in less than a minute.
 - Data quality issue, assigning the wrong ID to the end station.

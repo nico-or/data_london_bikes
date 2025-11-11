@@ -2,7 +2,7 @@
 
 The data source is the [Transport for London (TfL) Open Data](https://tfl.gov.uk/info-for/open-data-users/our-open-data), in particular, their [cycling section](https://cycling.data.tfl.gov.uk/).
 
-We will focus on the data presentend in the ` usage-stats/` section.
+We will focus on the data presented in the ` usage-stats/` section.
 
 ## Available data
 
@@ -12,7 +12,7 @@ We will focus our work on the data from 2024, since it is the most recent year w
 
 ## Download
 
-Opening the [TfL cycling repositorty](https://cycling.data.tfl.gov.uk/) and executing the following script on the browser console will return an array with the desired 24 elements. After that, one could use many methods to actually download the CSV files.
+Opening the [TfL cycling repository](https://cycling.data.tfl.gov.uk/) and executing the following script on the browser console will return an array with the desired 24 elements. After that, one could use many methods to actually download the CSV files.
 
 ```js
 links = $$("a");
@@ -23,7 +23,7 @@ links.filter((e) => {
 
 ## Storage
 
-For long time storage we compress the files using Gzip, which redices the dataset total disk space from 1.4 Gb to 300 Mb.
+For long time storage we compress the files using Gzip, which reduces the dataset total disk space from 1.4 Gb to 300 Mb.
 
 ```sh
 # Plain bash

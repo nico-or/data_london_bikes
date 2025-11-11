@@ -1,4 +1,4 @@
-# Data Descripton
+# Data Description
 
 ## Schema
 
@@ -16,4 +16,4 @@ Every record in the dataset has the following fields:
 | Bike number          | UINT      | FK        | Bike ID                                              |
 | Bike model           | STRING    | Attribute | Type of bike                                         |
 | Total duration       | STRING    | Attribute | Human-readable representation of Total duration (ms) |
-| Total duration (ms)  | UINT      | Attribute | Bike trip lenght in miliseconds                      |
+| Total duration (ms)  | UINT      | Attribute | Bike trip length in milliseconds                     |

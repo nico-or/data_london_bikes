@@ -11,7 +11,7 @@ DuckDB allows us to:
 
 ## Attribute renaming
 
-New values for the trip attributes is assigned at load time to simplify SQL query writting.
+New values for the trip attributes is assigned at load time to simplify SQL query writing.
 
 | Original Field Name  | New Field Name     | DuckDB type |
 | -------------------- | ------------------ | ----------- |
@@ -48,7 +48,7 @@ CREATE TABLE trips_raw (
 
 ## CSV formatting
 
-There are 2 types of formatting between the 24 files, the 4 files from August and September beign the only odd ones.
+There are 2 types of formatting between the 24 files, the 4 files from August and September being the only odd ones.
 
 The main format:
 
@@ -65,7 +65,7 @@ The main format:
 The secondary format:
 
 - quotes only on station name fields
-- non-0-padded integers as IDs for Trips, Staations and Bikes
+- non-0-padded integers as IDs for Trips, Stations and Bikes
 - Timestamp format is `DD/MM/YYYY HH:MM`
 
 ```
@@ -100,11 +100,11 @@ FROM read_csv(
 
 ## Utility Attributes
 
-To facilitate future analysis a few new atttributes will be created.
+To facilitate future analysis a few new attributes will be created.
 
 ### Route ID
 
-To create a `route_id` we concatenate the 0-padded versions of the station IDs. After checking the maximun value of a station ID, 9 characters are enough to pad every value.
+To create a `route_id` we concatenate the 0-padded versions of the station IDs. After checking the maximum value of a station ID, 9 characters are enough to pad every value.
 
 ```sql
 ALTER TABLE trips_raw

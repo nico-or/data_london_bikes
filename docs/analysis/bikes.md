@@ -25,7 +25,7 @@ Possible causes:
 
 ## Bike first use date
 
-We get thefirst use date for each bike and plotting the cumulative proportion of bikes used as the year goes on.
+We get the first use date for each bike and plotting the cumulative proportion of bikes used as the year goes on.
 
 ![Bike cumulative distribution: first use date](../images/02_bike_first_use_date.png)
 
@@ -39,7 +39,7 @@ Here we can see that:
 
 ## Bike age vs Trip count
 
-Checking the correlation betweenn a bike's first trip date and the total trip count we observe:
+Checking the correlation between a bike's first trip date and the total trip count we observe:
 
 - Bike Age and Trip count have an inverse relationship.
 - Older bikes have a wide distribution of trip counts.
