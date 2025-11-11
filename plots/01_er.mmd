@@ -1,0 +1,26 @@
+---
+config:
+  theme: "default"
+---
+erDiagram
+    TRIP }|--|| BIKE : uses
+    TRIP }|--|| STATION : "starts at"
+    TRIP }|--|| STATION : "ends at"
+    TRIP {
+        INT trip_id PK
+        TIMESTAMP date_start
+        INT station_start_id FK
+        TIMESTAMP date_end
+        INT station_end_id FK
+        INT bike_id FK
+        STRING duration_text
+        INT duration_ms
+    }
+    STATION {
+        INT station_id PK
+        STRING station_name
+    }
+    BIKE {
+        INT bike_id PK
+        STRING bike_model
+    }

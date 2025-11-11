@@ -1,0 +1,39 @@
+---
+config:
+  theme: "default"
+---
+erDiagram
+    %% TRIP }|--|| BIKE : uses
+    %% TRIP }|--|| STATION : "starts at"
+    %% TRIP }|--|| STATION : "ends at"
+    TRIP }|--|| DATE : "starts at"
+    TRIP }|--|| DATE : "ends at"
+    TRIP }|--|| TIME : "starts at"
+    TRIP }|--|| TIME : "ends at"
+    TRIP {
+        INT trip_id PK
+        INT date_start_id FK
+        INT hour_start_id FK
+        INT station_start_id FK
+        INT date_end_id FK
+        INT hour_end_id FK
+        INT station_end_id FK
+        INT bike_id FK
+        STRING duration_text
+        INT duration_ms
+    }
+    DATE {
+        INT date_id PK "YYYYMMDD"
+        INT year "2024"
+        INT month "2"
+        INT day "13"
+        ENUM season "winter"
+        ENUM weather "rain"
+        BOOL is_weekend
+    }
+    TIME {
+        INT time_id PK "HHMM"
+        INT hour "2"
+        INT minute "13"
+        ENUM day_period "midnight"
+    }
