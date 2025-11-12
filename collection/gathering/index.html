@@ -353,9 +353,27 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#available-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      Available data
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#download" class="md-nav__link">
     <span class="md-ellipsis">
       Download
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#storage" class="md-nav__link">
+    <span class="md-ellipsis">
+      Storage
     </span>
   </a>
   
@@ -382,7 +400,7 @@
   
   
   <span class="md-ellipsis">
-    Data Descripton
+    Data Description
     
   </span>
   
@@ -474,6 +492,75 @@
   
   <span class="md-ellipsis">
     Data Loading
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../process/model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Data Modeling
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../process/validate/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Data Validation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../process/normalize/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Normalization
     
   </span>
   
@@ -632,9 +719,27 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#available-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      Available data
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#download" class="md-nav__link">
     <span class="md-ellipsis">
       Download
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#storage" class="md-nav__link">
+    <span class="md-ellipsis">
+      Storage
     </span>
   </a>
   
@@ -661,16 +766,36 @@
 
 <h1 id="data-gathering">Data Gathering</h1>
 <p>The data source is the <a href="https://tfl.gov.uk/info-for/open-data-users/our-open-data">Transport for London (TfL) Open Data</a>, in particular, their <a href="https://cycling.data.tfl.gov.uk/">cycling section</a>.</p>
-<p>The data is published aggregating 2 weeks of data per CSV file (2 per month, 24 in a year).</p>
+<p>We will focus on the data presented in the <code>usage-stats/</code> section.</p>
+<h2 id="available-data">Available data</h2>
+<p>The data is published as a single CSV file every two weeks. Individual links for the CSV files ranging from January 2016 up to May 2025 are available at the time of writting. There are also individual ZIP files with all the year CSV files for 2012 to 2016.</p>
+<p>We will focus our work on the data from 2024, since it is the most recent year with it's complete data available.</p>
 <h2 id="download">Download</h2>
-<p>Opening the <a href="https://cycling.data.tfl.gov.uk/">TfL cycling repositorty</a> and executing the following script on the browser console will return an array with the desired 24 elements. After that, one could use many methods to actually download the CSV files.</p>
-<pre><code class="language-js">links = $$(&quot;a&quot;);
-links.filter((e) =&gt; e.innerText.includes(&quot;2024.csv&quot;));
-</code></pre>
-<p>To save disk space we compress eeach individual file using gzip.</p>
-<pre><code class="language-sh">ls data/*.csv | parallel -j 6 gzip -k {}
-</code></pre>
-<p>This reduces the dataset size from 1.4Gb to 300Mb.</p>
+<p>Opening the <a href="https://cycling.data.tfl.gov.uk/">TfL cycling repository</a> and executing the following script on the browser console will return an array with the desired 24 elements. After that, one could use many methods to actually download the CSV files.</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nx">links</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">$$</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">);</span>
+<span class="nx">links</span><span class="p">.</span><span class="nx">filter</span><span class="p">((</span><span class="nx">e</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">e</span><span class="p">.</span><span class="nx">innerText</span><span class="p">.</span><span class="nx">includes</span><span class="p">(</span><span class="s2">&quot;2024.csv&quot;</span><span class="p">);</span>
+<span class="p">});</span>
+</code></pre></div></td></tr></table></div>
+<h2 id="storage">Storage</h2>
+<p>For long time storage we compress the files using Gzip, which reduces the dataset total disk space from 1.4 Gb to 300 Mb.</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1"># Plain bash</span>
+<span class="k">for</span><span class="w"> </span>file<span class="w"> </span><span class="k">in</span><span class="w"> </span>data/*.csv<span class="p">;</span>
+<span class="k">do</span><span class="w"> </span>gzip<span class="w"> </span><span class="nv">$file</span><span class="p">;</span>
+<span class="k">done</span>
+
+<span class="c1"># leveraging GNU parallel</span>
+ls<span class="w"> </span>data/*.csv<span class="w"> </span><span class="p">|</span><span class="w"> </span>parallel<span class="w"> </span>-j<span class="w"> </span><span class="m">6</span><span class="w"> </span>gzip<span class="w"> </span><span class="o">{}</span>
+</code></pre></div></td></tr></table></div>
 
 
 
@@ -717,13 +842,13 @@ links.filter((e) =&gt; e.innerText.includes(&quot;2024.csv&quot;));
         
         
           
-          <a href="../description/" class="md-footer__link md-footer__link--next" aria-label="Next: Data Descripton">
+          <a href="../description/" class="md-footer__link md-footer__link--next" aria-label="Next: Data Description">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                Data Descripton
+                Data Description
               </div>
             </div>
             <div class="md-footer__button md-icon">

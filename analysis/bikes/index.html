@@ -327,7 +327,7 @@
   
   
   <span class="md-ellipsis">
-    Data Descripton
+    Data Description
     
   </span>
   
@@ -419,6 +419,75 @@
   
   <span class="md-ellipsis">
     Data Loading
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../process/model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Data Modeling
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../process/validate/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Data Validation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../process/normalize/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Normalization
     
   </span>
   
@@ -695,14 +764,20 @@
 
 <h1 id="bikes">Bikes</h1>
 <p>A total of 14920 unique bikes were used during 2024.</p>
-<pre><code class="language-sql">SELECT COUNT(DISTINCT bike_id) FROM trips;
-┌─────────────────────────┐
-│ count(DISTINCT bike_id) │
-│          int64          │
-├─────────────────────────┤
-│          14920          │
-└─────────────────────────┘
-</code></pre>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="k">COUNT</span><span class="p">(</span><span class="k">DISTINCT</span><span class="w"> </span><span class="n">bike_id</span><span class="p">)</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">trips</span><span class="p">;</span>
+<span class="err">┌─────────────────────────┐</span>
+<span class="err">│</span><span class="w"> </span><span class="k">count</span><span class="p">(</span><span class="k">DISTINCT</span><span class="w"> </span><span class="n">bike_id</span><span class="p">)</span><span class="w"> </span><span class="err">│</span>
+<span class="err">│</span><span class="w">          </span><span class="n">int64</span><span class="w">          </span><span class="err">│</span>
+<span class="err">├─────────────────────────┤</span>
+<span class="err">│</span><span class="w">          </span><span class="mi">14920</span><span class="w">          </span><span class="err">│</span>
+<span class="err">└─────────────────────────┘</span>
+</code></pre></div></td></tr></table></div>
 <h2 id="bike-trip-count">Bike trip count</h2>
 <p>The trip count among all bikes shows a multi-mode distribution.</p>
 <p><img alt="Bike histogram: trip count among all bikes" src="../../images/02_bike_use_count.png" /></p>
@@ -712,7 +787,7 @@
 <li><strong>Age</strong>: New bikes could be added in batches mid-year.</li>
 </ul>
 <h2 id="bike-first-use-date">Bike first use date</h2>
-<p>We get thefirst use date for each bike and plotting the cumulative proportion of bikes used as the year goes on.</p>
+<p>We get the first use date for each bike and plotting the cumulative proportion of bikes used as the year goes on.</p>
 <p><img alt="Bike cumulative distribution: first use date" src="../../images/02_bike_first_use_date.png" /></p>
 <p>We assume that a bike's first use is a good indicator of the bikes age inside the system. The bike could be new or was assigned a new ID after refurbishing.</p>
 <p>Here we can see that:</p>
@@ -722,7 +797,7 @@
 <li>a big increase in bikes is observed around July and October.</li>
 </ul>
 <h2 id="bike-age-vs-trip-count">Bike age vs Trip count</h2>
-<p>Checking the correlation betweenn a bike's first trip date and the total trip count we observe:</p>
+<p>Checking the correlation between a bike's first trip date and the total trip count we observe:</p>
 <ul>
 <li>Bike Age and Trip count have an inverse relationship.</li>
 <li>Older bikes have a wide distribution of trip counts.</li>

@@ -12,7 +12,7 @@
         <link rel="prev" href="../">
       
       
-        <link rel="next" href="../../analysis/">
+        <link rel="next" href="../model/">
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
@@ -329,7 +329,7 @@
   
   
   <span class="md-ellipsis">
-    Data Descripton
+    Data Description
     
   </span>
   
@@ -476,9 +476,9 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#csv-formatting" class="md-nav__link">
+  <a href="#csv-attribute-formatting" class="md-nav__link">
     <span class="md-ellipsis">
-      CSV formatting
+      CSV attribute formatting
     </span>
   </a>
   
@@ -493,52 +493,79 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#utility-attributes" class="md-nav__link">
-    <span class="md-ellipsis">
-      Utility Attributes
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Utility Attributes">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#route-id" class="md-nav__link">
-    <span class="md-ellipsis">
-      Route ID
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#trip-duration-in-minutes" class="md-nav__link">
-    <span class="md-ellipsis">
-      Trip duration in minutes
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#round-trip-flag" class="md-nav__link">
-    <span class="md-ellipsis">
-      Round trip flag
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
     </ul>
   
 </nav>
       
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Data Modeling
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../validate/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Data Validation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../normalize/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Normalization
+    
+  </span>
+  
+
+      </a>
     </li>
   
 
@@ -701,9 +728,9 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#csv-formatting" class="md-nav__link">
+  <a href="#csv-attribute-formatting" class="md-nav__link">
     <span class="md-ellipsis">
-      CSV formatting
+      CSV attribute formatting
     </span>
   </a>
   
@@ -715,48 +742,6 @@
       Data Load
     </span>
   </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#utility-attributes" class="md-nav__link">
-    <span class="md-ellipsis">
-      Utility Attributes
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Utility Attributes">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#route-id" class="md-nav__link">
-    <span class="md-ellipsis">
-      Route ID
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#trip-duration-in-minutes" class="md-nav__link">
-    <span class="md-ellipsis">
-      Trip duration in minutes
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#round-trip-flag" class="md-nav__link">
-    <span class="md-ellipsis">
-      Round trip flag
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -780,21 +765,14 @@
 
 
 <h1 id="data-loading">Data Loading</h1>
-<p>Before analysis we must join all files into a convenient format that allows us freedom to query and transform the data. The tool of choice was DuckDB.</p>
-<p>DuckDB allows us to:</p>
-<ul>
-<li>fast iteration while working on the CLI</li>
-<li>load csv data from zipped csv files</li>
-<li>export the data to multiple file formats such as duckdb, sqlite, csv and more.</li>
-<li>execute SQL queries stored in plaintext files against said database</li>
-</ul>
+<p>To allow a more flexible data exploration we must first join the records from the individual CSV files into a single database.</p>
 <h2 id="attribute-renaming">Attribute renaming</h2>
-<p>New values for the trip attributes is assigned at load time to simplify SQL query writting.</p>
+<p>To simplify the SQL query writing we assign new names for the attributes is assigned at load time to simplify SQL query writing.</p>
 <table>
 <thead>
 <tr>
-<th>Original Field Name</th>
-<th>New Field Name</th>
+<th>Original Attribute Name</th>
+<th>New Attribute Name</th>
 <th>DuckDB type</th>
 </tr>
 </thead>
@@ -856,100 +834,190 @@
 </tr>
 </tbody>
 </table>
-<p>The SQL command to create the table</p>
-<pre><code class="language-sql">-- Create target table
-CREATE TABLE trips_raw (
-    trip_id BIGINT,
-    date_start TIMESTAMP,
-    date_end TIMESTAMP,
-    station_start_id BIGINT,
-    station_end_id BIGINT,
-    station_start_name VARCHAR,
-    station_end_name VARCHAR,
-    bike_id BIGINT,
-    bike_model VARCHAR,
-    duration_text VARCHAR,
-    duration_ms BIGINT,
-);
-</code></pre>
-<h2 id="csv-formatting">CSV formatting</h2>
-<p>There are 2 types of formatting between the 24 files, the 4 files from August and September beign the only odd ones.</p>
+<p>The SQL command to create the table:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">trips_raw</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">trip_id</span><span class="w"> </span><span class="nb">BIGINT</span><span class="p">,</span>
+<span class="w">    </span><span class="n">date_start</span><span class="w"> </span><span class="k">TIMESTAMP</span><span class="p">,</span>
+<span class="w">    </span><span class="n">date_end</span><span class="w"> </span><span class="k">TIMESTAMP</span><span class="p">,</span>
+<span class="w">    </span><span class="n">station_start_id</span><span class="w"> </span><span class="nb">BIGINT</span><span class="p">,</span>
+<span class="w">    </span><span class="n">station_end_id</span><span class="w"> </span><span class="nb">BIGINT</span><span class="p">,</span>
+<span class="w">    </span><span class="n">station_start_name</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">,</span>
+<span class="w">    </span><span class="n">station_end_name</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">,</span>
+<span class="w">    </span><span class="n">bike_id</span><span class="w"> </span><span class="nb">BIGINT</span><span class="p">,</span>
+<span class="w">    </span><span class="n">bike_model</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">,</span>
+<span class="w">    </span><span class="n">duration_text</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">,</span>
+<span class="w">    </span><span class="n">duration_ms</span><span class="w"> </span><span class="nb">BIGINT</span><span class="p">,</span>
+<span class="p">);</span>
+</code></pre></div></td></tr></table></div>
+<h2 id="csv-attribute-formatting">CSV attribute formatting</h2>
+<p>After inspecting all the CSV files, we found that there are 2 types of formatting. The 4 files from August and September being the only odd ones.</p>
 <p>The main format:</p>
 <ul>
 <li>quotes on every field</li>
 <li>0-padded strings as IDs for Trips, Stations and Bikes</li>
 <li>Timestamp format is <code>YYYY-MM-DD HH:MM</code></li>
 </ul>
-<pre><code>&quot;Number&quot;   , &quot;Start date&quot;      , &quot;Start station number&quot;, &quot;Start station&quot;                       , &quot;End date&quot;        , &quot;End station number&quot;, &quot;End station&quot;                        , &quot;Bike number&quot;, &quot;Bike model&quot;, &quot;Total duration&quot;, &quot;Total duration (ms)&quot;
-&quot;136666627&quot;, &quot;2024-01-14 23:59&quot;, &quot;001108&quot;              , &quot;North Wharf Road, Paddington&quot;        , &quot;2024-01-15 00:06&quot;, &quot;003423&quot;            , &quot;Maida Vale, Maida Vale&quot;             , &quot;53020&quot;      , &quot;CLASSIC&quot;   , &quot;6m 47s&quot;        , &quot;407799&quot;
-&quot;136666625&quot;, &quot;2024-01-14 23:57&quot;, &quot;003447&quot;              , &quot;Gloucester Road (North), Kensington&quot; , &quot;2024-01-15 00:05&quot;, &quot;001214&quot;            , &quot;Kensington Olympia Station, Olympia&quot;, &quot;54559&quot;      , &quot;CLASSIC&quot;   , &quot;8m 1s&quot;         , &quot;481276&quot;
-</code></pre>
+<table>
+<thead>
+<tr>
+<th>"Number"</th>
+<th>"Start date"</th>
+<th>"Start station number"</th>
+<th>"Start station"</th>
+<th>"End date"</th>
+<th>"End station number"</th>
+<th>"End station"</th>
+<th>"Bike number"</th>
+<th>"Bike model"</th>
+<th>"Total duration"</th>
+<th>"Total duration (ms)"</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>"136666627"</td>
+<td>"2024-01-14 23:59"</td>
+<td>"001108"</td>
+<td>"North Wharf Road, Paddington"</td>
+<td>"2024-01-15 00:06"</td>
+<td>"003423"</td>
+<td>"Maida Vale, Maida Vale"</td>
+<td>"53020"</td>
+<td>"CLASSIC"</td>
+<td>"6m 47s"</td>
+<td>"407799"</td>
+</tr>
+<tr>
+<td>"136666625"</td>
+<td>"2024-01-14 23:57"</td>
+<td>"003447"</td>
+<td>"Gloucester Road (North), Kensington"</td>
+<td>"2024-01-15 00:05"</td>
+<td>"001214"</td>
+<td>"Kensington Olympia Station, Olympia"</td>
+<td>"54559"</td>
+<td>"CLASSIC"</td>
+<td>"8m 1s"</td>
+<td>"481276"</td>
+</tr>
+</tbody>
+</table>
 <p>The secondary format:</p>
 <ul>
 <li>quotes only on station name fields</li>
-<li>non-0-padded integers as IDs for Trips, Staations and Bikes</li>
+<li>non-0-padded integers as IDs for Trips, Stations and Bikes</li>
 <li>Timestamp format is <code>DD/MM/YYYY HH:MM</code></li>
 </ul>
-<pre><code>Number   , Start date      , Start station number, Start station                        , End date        , End station number, End station                       , Bike number, Bike model, Total duration, Total duration (ms)
-142043054, 14/08/2024 23:59,                22165, &quot;Fisherman's Walk West, Canary Wharf&quot;, 15/08/2024 00:40,             200233, &quot;South Quay East, Canary Wharf&quot;   ,       59663, CLASSIC   , 40m 53s       ,             2453526
-142043055, 14/08/2024 23:59,                22159, &quot;Ebury Bridge, Pimlico&quot;              , 15/08/2024 00:04,                965, &quot;Tachbrook Street, Victoria&quot;      ,       57811, CLASSIC   , 4m 54s        ,              294201
-</code></pre>
+<table>
+<thead>
+<tr>
+<th>Number</th>
+<th>Start date</th>
+<th>Start station number</th>
+<th>Start station</th>
+<th>End date</th>
+<th>End station number</th>
+<th>End station</th>
+<th>Bike number</th>
+<th>Bike model</th>
+<th>Total duration</th>
+<th>Total duration (ms)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>142043054</td>
+<td>14/08/2024 23:59</td>
+<td>22165</td>
+<td>"Fisherman's Walk West,Canary Wharf"</td>
+<td>15/08/2024 00:40</td>
+<td>200233</td>
+<td>"South Quay East, Canary Wharf"</td>
+<td>59663</td>
+<td>CLASSIC</td>
+<td>40m 53s</td>
+<td>2453526</td>
+</tr>
+<tr>
+<td>142043055</td>
+<td>14/08/2024 23:59</td>
+<td>22159</td>
+<td>"Ebury Bridge, Pimlico"</td>
+<td>15/08/2024 00:04</td>
+<td>965</td>
+<td>"Tachbrook Street, Victoria"</td>
+<td>57811</td>
+<td>CLASSIC</td>
+<td>4m 54s</td>
+<td>294201</td>
+</tr>
+</tbody>
+</table>
 <h2 id="data-load">Data Load</h2>
-<p>After accounting for the attributes data types, name aliases and timestamp formatting differences, we arrive at 2 SQL statements to load the data.</p>
-<p>A reduced version of the final query to load the secondary format files:</p>
-<pre><code class="language-sql">-- Load format_1 files
-INSERT INTO trips_raw
-SELECT
-    &quot;Number&quot; AS trip_id,
-    -- more lines ...
-    &quot;Total duration (ms)&quot; AS duration_ms,
-FROM read_csv(
-    'data/format_1/*.csv.gz',
-    types={
-        'Start date': TIMESTAMP,
-        -- more lines ...
-        'Bike number': BIGINT,
-    },
-    timestampformat='%d/%m/%Y %H:%M'
-);
-</code></pre>
-<h2 id="utility-attributes">Utility Attributes</h2>
-<p>To facilitate future analysis a few new atttributes will be created.</p>
-<h3 id="route-id">Route ID</h3>
-<p>To create a <code>route_id</code> we concatenate the 0-padded versions of the station IDs. After checking the maximun value of a station ID, 9 characters are enough to pad every value.</p>
-<pre><code class="language-sql">ALTER TABLE trips_raw
-ADD COLUMN route_id VARCHAR;
-
-UPDATE trips_raw
-SET route_id = format('{:09d}{:09d}', station_start_id, station_end_id);
-</code></pre>
-<p>Using this scheme also ensures that the route from A to B is different from the route from B to A.</p>
-<h3 id="trip-duration-in-minutes">Trip duration in minutes</h3>
-<p>A quick check of the <code>duration_ms</code> attribute reveals that 75% of the values fall bellow 21 minutes.</p>
-<pre><code class="language-sql">SUMMARIZE -- DuckDb utility function
-SELECT duration_ms/(1000 * 60)
-FROM trips_raw;
-
--- Q25:  7.64 minutes
--- Q50: 13.05 minutes
--- Q75: 20.92 minutes
-</code></pre>
-<p>With this reference values I decided to add a calculated duration_minutes attribute to each record to facilitate filtering.</p>
-<pre><code class="language-sql">ALTER TABLE trips_raw
-ADD COLUMN duration_minutes DOUBLE;
-
-UPDATE trips_raw
-SET duration_minutes = duration_ms/(1000 * 60);
-</code></pre>
-<h3 id="round-trip-flag">Round trip flag</h3>
-<p>A boolean column is added to quickly filter trips that start and end in the same location.</p>
-<pre><code class="language-sql">-- Add round trip flag
-ALTER TABLE trips
-ADD COLUMN round_trip BOOL DEFAULT false;
-
-UPDATE trips
-SET round_trip = (station_start_id == station_end_id);
-</code></pre>
+<p>Now we write a DuckDB query that will read evert CSV file, apply the new naming scheme, parse the conflicting timestamp formats and append the records to our <code>trips_raw</code> table.</p>
+<p>Here is the query to import the secondary format files. The query from the main format remains differs only in the path and <code>timestampformat</code> flag.</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1">-- Load format_1 files</span>
+<span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">trips_raw</span>
+<span class="w">    </span><span class="k">SELECT</span>
+<span class="w">        </span><span class="ss">&quot;Number&quot;</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">trip_id</span><span class="p">,</span>
+<span class="w">        </span><span class="ss">&quot;Start date&quot;</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">date_start</span><span class="p">,</span>
+<span class="w">        </span><span class="ss">&quot;End date&quot;</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">date_end</span><span class="p">,</span>
+<span class="w">        </span><span class="ss">&quot;Start station number&quot;</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">station_start_id</span><span class="p">,</span>
+<span class="w">        </span><span class="ss">&quot;End station number&quot;</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">station_end_id</span><span class="p">,</span>
+<span class="w">        </span><span class="ss">&quot;Start station&quot;</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">station_start_name</span><span class="p">,</span>
+<span class="w">        </span><span class="ss">&quot;End station&quot;</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">station_end_name</span><span class="p">,</span>
+<span class="w">        </span><span class="ss">&quot;Bike number&quot;</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">bike_id</span><span class="p">,</span>
+<span class="w">        </span><span class="ss">&quot;Bike model&quot;</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">bike_model</span><span class="p">,</span>
+<span class="w">        </span><span class="ss">&quot;Total duration&quot;</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">duration_text</span><span class="p">,</span>
+<span class="w">        </span><span class="ss">&quot;Total duration (ms)&quot;</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">duration_ms</span><span class="p">,</span>
+<span class="w">    </span><span class="k">FROM</span><span class="w"> </span><span class="n">read_csv</span><span class="p">(</span>
+<span class="w">        </span><span class="s1">&#39;data/format_1/*.csv.gz&#39;</span><span class="p">,</span>
+<span class="w">        </span><span class="n">types</span><span class="o">=</span><span class="err">{</span>
+<span class="w">            </span><span class="s1">&#39;Start date&#39;</span><span class="p">:</span><span class="w"> </span><span class="k">TIMESTAMP</span><span class="p">,</span>
+<span class="w">            </span><span class="s1">&#39;Start station number&#39;</span><span class="p">:</span><span class="w"> </span><span class="nb">BIGINT</span><span class="p">,</span>
+<span class="w">            </span><span class="s1">&#39;End station number&#39;</span><span class="p">:</span><span class="w"> </span><span class="nb">BIGINT</span><span class="p">,</span>
+<span class="w">            </span><span class="s1">&#39;Number&#39;</span><span class="p">:</span><span class="w"> </span><span class="nb">BIGINT</span><span class="p">,</span>
+<span class="w">            </span><span class="s1">&#39;Bike number&#39;</span><span class="p">:</span><span class="w"> </span><span class="nb">BIGINT</span><span class="p">,</span>
+<span class="w">        </span><span class="err">}</span><span class="p">,</span>
+<span class="w">        </span><span class="n">timestampformat</span><span class="o">=</span><span class="s1">&#39;%d/%m/%Y %H:%M&#39;</span>
+<span class="w">    </span><span class="p">);</span>
+</code></pre></div></td></tr></table></div>
 
 
 
@@ -996,13 +1064,13 @@ SET round_trip = (station_start_id == station_end_id);
         
         
           
-          <a href="../../analysis/" class="md-footer__link md-footer__link--next" aria-label="Next: Analysis">
+          <a href="../model/" class="md-footer__link md-footer__link--next" aria-label="Next: Data Modeling">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                Analysis
+                Data Modeling
               </div>
             </div>
             <div class="md-footer__button md-icon">
