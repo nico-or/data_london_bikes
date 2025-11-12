@@ -105,27 +105,6 @@ ORDER BY bike_id;
 |   62732 | CLASSIC    |
 |   62737 | CLASSIC    |
 
-Removing the lines used to filter the conflicting `bike_id` we arrive at a query that will result in a normalized bikes table.
-
-```sql
-WITH bikes_ranked AS (
-    SELECT
-        bike_id,
-        bike_model,
-        ROW_NUMBER() OVER (
-            PARTITION BY bike_id
-            ORDER BY date_end DESC
-        ) AS rn
-    FROM trips_raw
-)
-SELECT
-    bike_id,
-    bike_model
-FROM bikes_ranked
-WHERE rn = 1
-ORDER BY bike_id;
-```
-
 ## Stations
 
 In a similar fashion, we can check that every `station_id`has a unique `station_name`, with the additional care to merge all `start_station` and `end_station` attributes into a single stations table.
@@ -275,36 +254,3 @@ ORDER BY station_id;
 |       1006 | Percy Street, Bloomsbury       |
 |     200118 | Albert Street, Camden Town     |
 |     300100 | Limburg Road, Clapham Junction |
-
-Removing the lines used to filter the conflicting `station_id` we arrive at a query that will result in a normalized stations table.
-
-```sql
-WITH stations_complete AS (
-    SELECT
-        station_start_id AS station_id,
-        station_start_name AS station_name,
-        date_start AS trip_date
-    FROM trips_raw
-    UNION ALL
-    SELECT
-        station_end_id AS station_id,
-        station_end_name AS station_name,
-        date_end AS trip_date
-    FROM trips_raw
-), stations_ranked AS (
-    SELECT
-        station_id,
-        station_name,
-        ROW_NUMBER() OVER (
-            PARTITION BY station_id
-            ORDER BY trip_date DESC
-    ) AS rn
-    FROM stations_complete
-)
-SELECT
-    station_id,
-    station_name
-FROM stations_ranked
-WHERE rn = 1
-ORDER BY station_id;
-```
