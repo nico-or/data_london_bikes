@@ -6,6 +6,12 @@ theme:
   name: material
   features:
     - navigation.footer
+
+markdown_extensions:
+  - pymdownx.highlight:
+      linenums: true
+  - pymdownx.superfences
+
 nav:
   - "index.md"
   - "Collection":
