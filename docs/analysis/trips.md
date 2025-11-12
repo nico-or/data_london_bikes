@@ -38,13 +38,13 @@ Closer inspection of round trips reveals a double mode.
 
 Some possible causes:
 
-- **short trips**:
-  - users changing their mind about using the bike
-  - users testing the app functionality and/or the bikes themselves
-  - users taking short trips around the block
-- **average trips**:
-  - users running errands
-  - taking longer pleasure routes
+-   **short trips**:
+    -   users changing their mind about using the bike
+    -   users testing the app functionality and/or the bikes themselves
+    -   users taking short trips around the block
+-   **average trips**:
+    -   users running errands
+    -   taking longer pleasure routes
 
 ### Trips under 1 minute
 
@@ -75,13 +75,13 @@ Removing the round trips of less than 1 minute we get a more natural distributio
 
 Without more information it's impossible to discern the quality of the remaining 2 thousand trips records. Some possibilities:
 
-- The two stations are really close and make it possible to get between them in less than a minute.
-- Data quality issue, assigning the wrong ID to the end station.
+-   The two stations are really close and make it possible to get between them in less than a minute.
+-   Data quality issue, assigning the wrong ID to the end station.
 
 Going forward I will only focus on trips with durations:
 
-- less or equal to 60 minutes
-- different start and end locations if `duration_minutes` is less than 1 minute.
+-   less or equal to 60 minutes
+-   different start and end locations if `duration_minutes` is less than 1 minute.
 
 ```sql
 DELETE FROM trips

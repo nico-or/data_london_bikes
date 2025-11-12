@@ -4,5 +4,5 @@ Here we will describe the process to gather the dataset and make a general overv
 
 It is divided in the following steps:
 
-- **Gathering**: download and merge files.
-- **Description**: general overview of the dataset structure.
+-   **Gathering**: download and merge files.
+-   **Description**: general overview of the dataset structure.

@@ -44,9 +44,9 @@ After inspecting all the CSV files, we found that there are 2 types of formattin
 
 The main format:
 
-- quotes on every field
-- 0-padded strings as IDs for Trips, Stations and Bikes
-- Timestamp format is `YYYY-MM-DD HH:MM`
+-   quotes on every field
+-   0-padded strings as IDs for Trips, Stations and Bikes
+-   Timestamp format is `YYYY-MM-DD HH:MM`
 
 | "Number"    | "Start date"       | "Start station number" | "Start station"                       | "End date"         | "End station number" | "End station"                         | "Bike number" | "Bike model" | "Total duration" | "Total duration (ms)" |
 | ----------- | ------------------ | ---------------------- | ------------------------------------- | ------------------ | -------------------- | ------------------------------------- | ------------- | ------------ | ---------------- | --------------------- |
@@ -55,9 +55,9 @@ The main format:
 
 The secondary format:
 
-- quotes only on station name fields
-- non-0-padded integers as IDs for Trips, Stations and Bikes
-- Timestamp format is `DD/MM/YYYY HH:MM`
+-   quotes only on station name fields
+-   non-0-padded integers as IDs for Trips, Stations and Bikes
+-   Timestamp format is `DD/MM/YYYY HH:MM`
 
 | Number    | Start date       | Start station number | Start station                        | End date         | End station number | End station                     | Bike number | Bike model | Total duration | Total duration (ms) |
 | --------- | ---------------- | -------------------- | ------------------------------------ | ---------------- | ------------------ | ------------------------------- | ----------- | ---------- | -------------- | ------------------- |
