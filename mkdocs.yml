@@ -3,27 +3,27 @@ repo_url: https://github.com/nico-or/data_london_bikes
 copyright: Copyright &copy; 2025 Nicolás Órdenes
 
 theme:
-  name: material
-  features:
-    - navigation.footer
+    name: material
+    features:
+        - navigation.footer
 
 markdown_extensions:
-  - pymdownx.highlight:
-      linenums: true
-  - pymdownx.superfences
+    - pymdownx.highlight:
+          linenums: true
+    - pymdownx.superfences
 
 nav:
-  - "index.md"
-  - "Collection":
-      - "collection/index.md"
-      - "collection/gathering.md"
-      - "collection/description.md"
-  - "Process":
-      - "process/index.md"
-      - "process/load.md"
-      - "process/model.md"
-      - "process/validate.md"
-  - "Analysis":
-      - "analysis/index.md"
-      - "analysis/trips.md"
-      - "analysis/bikes.md"
+    - "index.md"
+    - "Collection":
+          - "collection/index.md"
+          - "collection/gathering.md"
+          - "collection/description.md"
+    - "Process":
+          - "process/index.md"
+          - "process/load.md"
+          - "process/model.md"
+          - "process/validate.md"
+    - "Analysis":
+          - "analysis/index.md"
+          - "analysis/trips.md"
+          - "analysis/bikes.md"
