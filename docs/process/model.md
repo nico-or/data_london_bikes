@@ -19,6 +19,7 @@ A quick inspection of the original record attributes makes it obvious that it's 
 | bike_model         | Bike    |
 | duration_text      | Trip    |
 | duration_ms        | Trip    |
+| filename           | Trip    |
 
 Resulting in the following Entity Relationship diagram:
 

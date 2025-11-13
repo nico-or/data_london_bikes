@@ -13,6 +13,7 @@ CREATE OR REPLACE TABLE trips_raw (
     bike_model VARCHAR,
     duration_text VARCHAR,
     duration_ms BIGINT,
+    filename VARCHAR
 );
 
 -- Load format_0 files
@@ -29,6 +30,7 @@ INSERT INTO trips_raw
         "Bike model" AS bike_model,
         "Total duration" AS duration_text,
         "Total duration (ms)" AS duration_ms,
+        filename,
     FROM read_csv(
         'data/format_0/*.csv.gz',
         types={
@@ -37,7 +39,8 @@ INSERT INTO trips_raw
             'End station number': BIGINT,
             'Number': BIGINT,
             'Bike number': BIGINT,
-        }
+        },
+        filename=true
     );
 
 -- Load format_1 files
@@ -54,6 +57,7 @@ INSERT INTO trips_raw
         "Bike model" AS bike_model,
         "Total duration" AS duration_text,
         "Total duration (ms)" AS duration_ms,
+        filename,
     FROM read_csv(
         'data/format_1/*.csv.gz',
         types={
@@ -63,5 +67,6 @@ INSERT INTO trips_raw
             'Number': BIGINT,
             'Bike number': BIGINT,
         },
+        filename=true,
         timestampformat='%d/%m/%Y %H:%M'
     );
