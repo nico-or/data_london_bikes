@@ -24,6 +24,7 @@ nav:
           - "process/model.md"
           - "process/validate.md"
           - "process/normalize.md"
+          - "process/extend.md"
     - "Analysis":
           - "analysis/index.md"
           - "analysis/trips.md"
