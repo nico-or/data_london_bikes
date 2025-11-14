@@ -1,4 +1,4 @@
-# Analysis
+# Analyze
 
 Now we will make a review of the main entities of the dataset:
 

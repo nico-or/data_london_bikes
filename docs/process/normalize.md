@@ -1,4 +1,4 @@
-# Normalization
+# Normalize
 
 Having decided on a data model and checked the reference integrity of `bike_id` and `station_id` we can execute the normalization of the `trips_raw` table.
 

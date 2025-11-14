@@ -23,3 +23,10 @@ I will be working mainly with:
 | [DuckDB](https://duckdb.org/)          | Parse, clean and query the dataset |
 | [Mermaid](https://mermaid.js.org/)     | General purpose diagrams           |
 | [Seaborn](https://seaborn.pydata.org/) | Complex plots                      |
+
+## Sections
+
+-   **Prepare**: Getting the dataset ready for exploration.
+-   **Explore**: Exploratory Data Analysis of main entities and attributes.
+-   **Process**: Clean and transform the original dataset.
+-   **Analyze**

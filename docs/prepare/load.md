@@ -1,4 +1,4 @@
-# Data Loading
+# Load
 
 To allow a more flexible data exploration we must first join the records from the individual CSV files into a single database.
 

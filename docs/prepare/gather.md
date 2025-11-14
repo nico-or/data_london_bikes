@@ -1,4 +1,4 @@
-# Data Gathering
+# Gather
 
 The data source is the [Transport for London (TfL) Open Data](https://tfl.gov.uk/info-for/open-data-users/our-open-data), in particular, their [cycling section](https://cycling.data.tfl.gov.uk/).
 

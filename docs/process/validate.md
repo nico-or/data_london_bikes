@@ -1,4 +1,4 @@
-# Data Validation
+# Validate
 
 Before applying the final normalization step and dividing the single table into the relational model, we can verify the data coherence.
 

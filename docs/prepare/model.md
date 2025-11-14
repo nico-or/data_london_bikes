@@ -1,4 +1,4 @@
-# Data Modeling
+# Model
 
 Applying data modeling and database normalization will provide a more manageable database and some principles to make it internally coherent.
 

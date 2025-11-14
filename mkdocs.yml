@@ -14,19 +14,24 @@ markdown_extensions:
 
 nav:
     - "index.md"
-    - "Collection":
-          - "collection/index.md"
-          - "collection/gathering.md"
-          - "collection/description.md"
+    - "Prepare":
+          - "prepare/index.md"
+          - "prepare/gather.md"
+          - "prepare/describe.md"
+          - "prepare/model.md"
+          - "prepare/load.md"
+    - "Explore":
+          - "explore/index.md"
+          - "explore/dates.md"
+          - "explore/bikes.md"
+          - "explore/stations.md"
+          - "explore/trip_durations.md"
     - "Process":
           - "process/index.md"
-          - "process/load.md"
-          - "process/explore.md"
-          - "process/model.md"
           - "process/validate.md"
           - "process/normalize.md"
           - "process/extend.md"
-    - "Analysis":
-          - "analysis/index.md"
-          - "analysis/trips.md"
-          - "analysis/bikes.md"
+    - "Analyze":
+          - "analyze/index.md"
+          - "analyze/trips.md"
+          - "analyze/bikes.md"
