@@ -21,6 +21,7 @@ nav:
     - "Process":
           - "process/index.md"
           - "process/load.md"
+          - "process/explore.md"
           - "process/model.md"
           - "process/validate.md"
           - "process/normalize.md"

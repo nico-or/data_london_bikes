@@ -28,29 +28,7 @@ SET route_id_bidirectional = CONCAT(
 
 ## Trip duration in minutes
 
-Milliseconds is not the most intuitive time measure unit to work with.
-A quick quantile check can tell us which of seconds, minutes or hours is the most appropriate measure.
-
-```sql
-SELECT
-    CAST(MIN(dm) AS FLOAT) AS min,
-    CAST(MAX(dm) AS FLOAT) AS max,
-    CAST(AVG(dm) AS FLOAT) AS avg,
-    CAST(quantile_disc(dm, 0.25) AS FLOAT) AS q25,
-    CAST(quantile_disc(dm, 0.50) AS FLOAT) AS q50,
-    CAST(quantile_disc(dm, 0.75) AS FLOAT) AS q75
-FROM (
-    SELECT duration_ms/(1000 * 60) AS dm
-    FROM trips
-);
-```
-
-|         min |        max |      avg |       q25 |      q50 |       q75 |
-| ----------: | ---------: | -------: | --------: | -------: | --------: |
-| 0.011316666 | 116181.195 | 23.02052 | 7.6446333 | 13.06195 | 20.923416 |
-
-We see that **75% of the trips last less than 21 minutes**, with a median of 13 minutes.
-With this reference we choose minutes as the most representative time measure.
+From the _Explore_ phase we now that **75% of the trips last less than 21 minutes**, with a median of 13 minutes. With this reference we choose minutes as a more representative time measure.
 
 ```sql
 -- Add trip duration in minutes column
